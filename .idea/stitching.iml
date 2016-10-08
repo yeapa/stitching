@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="CPP_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src/CImageTrans.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/CThread.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/COutDataWkThreadPool.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/CConfig.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/CLocalThreadLog.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/CAnonymSem.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/CEventObserver.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/CConfig.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/CThreadPool.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/CMsgQueue.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/CEventObserver.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/CException.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/CThread.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/COutDataWkThread.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/CLocalLog.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/CException.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/CSimpleConfig.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/CReator.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/CAnonymSem.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/CLocalThreadLog.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Message.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/CMutex.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/CLog.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/COutDataWkThreadPool.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/CReator.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/CMutex.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/CImageTrans.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/CThreadPool.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/CMsgQueue.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/CSimpleConfig.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/CLog.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/CLocalLog.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/COutDataWkThread.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
+    </content>
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library name="Header Search Paths">
+        <CLASSES>
+          <root url="file:///usr/lib/gcc/x86_64-linux-gnu/5/include-fixed" />
+          <root url="file:///usr/lib/gcc/x86_64-linux-gnu/5/include" />
+          <root url="file:///usr/include" />
+          <root url="file:///usr/local/include" />
+          <root url="file:///usr/local/ffmpeg/include" />
+        </CLASSES>
+        <SOURCES>
+          <root url="file:///usr/lib/gcc/x86_64-linux-gnu/5/include-fixed" />
+          <root url="file:///usr/lib/gcc/x86_64-linux-gnu/5/include" />
+          <root url="file:///usr/include" />
+          <root url="file:///usr/local/include" />
+          <root url="file:///usr/local/ffmpeg/include" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+  </component>
+</module>
