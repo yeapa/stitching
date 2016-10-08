@@ -22,6 +22,16 @@ void CImageTrans::exportAImage(){
     exportImage(srcImageRange(*m_pCurImage), vigra::ImageExportInfo(picName.c_str()).setCompression("80"));
 }
 
+void CImageTrans::exportAImage( vigra::BRGBImage* image,string path){
+    time_t  rawtime;
+    time(&rawtime);
+    char name[100];
+    sprintf(name,"%ld.jpg",rawtime);
+    string picName(name);
+    picName=path+picName;
+    exportImage(srcImageRange(*image), vigra::ImageExportInfo(picName.c_str()).setCompression("80"));
+}
+
 bool CImageTrans::transform(const unsigned char * pYUV)
 {
 

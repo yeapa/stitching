@@ -17,14 +17,16 @@ class CWkObserver: public CEventObserver
 public:
 	CWkObserver(unsigned int iEvent): CEventObserver(iEvent) {} ;
 	~CWkObserver() {};
-	int EventProcess(char *pInPara, char *pOutPara=NULL)
+	int EventProcess(vector<vigra::BRGBImage*> *pInPara, char *pOutPara=NULL)
 	{
 
 //		string picName= "./hello.jpg";
 //		exportImage(vigra::srcImageRange(*pInPara), vigra::ImageExportInfo(picName.c_str()).setCompression("80"));
-		cout<<"threadid="<<pthread_self();
+		cout<<"threadid="<<pthread_self()<<"  vectorSize: "<<pInPara->size()<<endl;
+
+        CImageTrans imageTrans(640,480);
+        imageTrans.exportAImage(pInPara->front(),"./");
 //		printf(" is dealing with \"%s\"\n",pInPara );
-		cout << endl;
 		return 0;
 	}
 };
@@ -56,8 +58,6 @@ int main(void)
 //    vector<vigra::BRGBImage*> vector4;
 //    vector<vigra::BRGBImage*> vector5;
 //    vector<vigra::BRGBImage*> vector6;
-    vigra::BRGBImage ** images=NULL;
-
 
 	int i=1;
 	CReator *pReator = CReator::Instance();
@@ -75,22 +75,25 @@ int main(void)
 	{
 		try
 		{
-			sleep(2);
+			sleep(1);
 			Message tTest;
+            vector<vigra::BRGBImage*> images;
 			// tTest.msg_type=1;
 			// snprintf(tTest.pPara,10, "hello %d para from queue",i);
-			msgQueue->receiveMsg(&tTest,0);
-            cout<<tTest.m_length<<endl;
-            imageTrans->transform((const unsigned char *) tTest.pPara);
-            queue1.push(imageTrans->getBRGBImage());
-            imageTrans->exportAImage();
-//            *images=new vigra::BRGBImage[6];
-//            while(!queue1.empty()){
-//                images[0]=queue1.front();
-//            }
+            while(queue1.empty()){
+                msgQueue->receiveMsg(&tTest,0);
+                cout<<tTest.m_length<<endl;
+                imageTrans->transform((const unsigned char *) tTest.pPara);
+                queue1.push(imageTrans->getBRGBImage());
+                imageTrans->exportAImage();
+            }
+            images.push_back(queue1.front());
+            queue1.pop();
+
 //			pThreadPool->DispatchEvent( (void *)imageTrans->getBRGBImage() );
 
-			pThreadPool->DispatchEvent( (void *)&tTest );
+//			pThreadPool->DispatchEvent( (void *)&tTest );
+            pThreadPool->DispatchEvent( (void *)&images);
 			i++;
 		}
 		catch(CException &ex)

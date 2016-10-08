@@ -4,6 +4,11 @@
 
 #include "CThreadPool.h"
 #include "COutDataWkThread.h"
+#include <stdimage.hxx>
+#include <rgbvalue.hxx>
+#include <sized_int.hxx>
+#include <imageinfo.hxx>
+#include <impex.hxx>
 // 本类是个线程池类。线程的调度有操作系统实现即线程共同阻塞在一个公共的CCond上，由于在Wake之前不知道哪个线程将被唤醒，所以无法将参数
 //传入线程对象。鉴于此，通过一个池和线程共享的队列m_QueTEvData来传递数据。本线程池动态静态都可以，不过对于本类线程池推荐用静态的。因
 //为动态时需要管理一个链表，这就失去了用操作系统调度的优势因为既然管了这个表，我还不如用CInerDataWkThread直接激活线程.
@@ -19,7 +24,7 @@ public:
 
 protected:
 	CMutex *m_ptTDataQueMutex; //and the same as the member of COutDataWkThread
-	queue<Message> m_QueTEvData;
+	queue<vector<vigra::BRGBImage*>> m_QueTEvData;
 	CReator *m_pReator;
 	bool m_bIsThreadAtrtr;
 	string m_strError;

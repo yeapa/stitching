@@ -9,6 +9,7 @@
 #include <list>
 #include <algorithm>
 #include <unistd.h>
+#include <stdimage.hxx>
 //#include "CException.h"
 #include "CAnonymSem.h"
 #include "Message.h"
@@ -20,7 +21,7 @@ using namespace std;
 class COutDataWkThread: public CThread
 {
 public:
-	COutDataWkThread(CReator *pReator,queue<Message> *pQueTEvData);
+	COutDataWkThread(CReator *pReator,queue<vector<vigra::BRGBImage*>> *pQueTEvData);
 	~COutDataWkThread();       //override the virtual
 
 	int ThreadFunc(void);     //override the virtual
@@ -35,7 +36,7 @@ protected:
 	// 下面这个指针指向的锁也被线程池COutDataWkThreadPool使用所以由单件类模式赋值
 	// 否则仅静态就可以满足本类的所有对象之用
 	static CMutex *m_ptTDataQueMutex ;
-	queue<Message> *m_pQueTEvData;
+	queue<vector<vigra::BRGBImage*>> *m_pQueTEvData;
 	CReator *m_ptReactor;
 	static bool m_bIsStatic;
 	static COutDataWkThread *m_pIdleMemFront;

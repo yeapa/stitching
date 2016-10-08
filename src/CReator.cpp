@@ -1,5 +1,7 @@
 
 #include "CReator.h"
+#include <vector>
+#include <stdimage.hxx>
 
 CReator * CReator::m_pReator=NULL;
 
@@ -35,14 +37,13 @@ CReator::MultiioEvent CReator::MultiIO()
 int CReator::EventNotify(void *pPara)
 {
 	CEventObserver *Observer=NULL;
-	Message tPara;
-	memcpy(&tPara,pPara,sizeof(tPara));
+	vector<vigra::BRGBImage*> tPara=*(vector<vigra::BRGBImage*>*)pPara;
 //	Observer = m_mapEvent[tPara.m_msgType];
 	Observer = m_mapEvent[1];
 	if( NULL== Observer )
 	{ m_strError = "error[the Observer is NULL in from m_mapEvent CReator::EventNotify]";  return -1;}
 	else
-	{ return (Observer->EventProcess(tPara.pPara)); }
+	{ return (Observer->EventProcess(&tPara)); }
 
 }
 

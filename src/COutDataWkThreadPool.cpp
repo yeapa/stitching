@@ -33,8 +33,7 @@ void COutDataWkThreadPool::DispatchEvent(void * pBuf)
 {
 	if( NULL!= pBuf )
 	{
-		Message tEvData;
-		memcpy((char *)&tEvData, pBuf, sizeof(tEvData));
+        vector<vigra::BRGBImage*> tEvData=*(vector<vigra::BRGBImage*>*)pBuf;
 		m_ptTDataQueMutex->Lock();
 		m_QueTEvData.push(tEvData);
 		m_ptTDataQueMutex->UnLock();

@@ -23,7 +23,7 @@ using namespace std;
 
 class CImageTrans {
 public:
-    CImageTrans(unsigned int width, unsigned int height,const string path):m_path(path),m_width(width),m_height(height){
+    CImageTrans(unsigned int width, unsigned int height,const string path="./"):m_path(path),m_width(width),m_height(height){
         m_pImgCtx = sws_getContext(m_width,m_height,AV_PIX_FMT_YUYV422,m_width,m_height,AV_PIX_FMT_RGB24,SWS_BILINEAR,0,0,0);
         m_pRGB24=new unsigned char[avpicture_get_size(AV_PIX_FMT_RGB24, m_width, m_height)];
     }
@@ -40,6 +40,7 @@ public:
     bool transform(const unsigned char * pYUV);
     void exportAImage(int i);
     void exportAImage();
+    void exportAImage(vigra::BRGBImage* image,string path);
 
 private:
     unsigned int m_width;

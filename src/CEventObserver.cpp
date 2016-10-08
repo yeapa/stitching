@@ -11,7 +11,7 @@ int CEventObserver::GetEventHandle(void)
 { return m_iEvent; }
 
 
-int CEventObserver::EventProcess(char *pInPara, char *pOutPara)
+int CEventObserver::EventProcess(vector<vigra::BRGBImage*> *pInPara, char *pOutPara)
 {
 	return 0;
 }

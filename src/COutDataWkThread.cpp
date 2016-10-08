@@ -7,7 +7,7 @@ CAnonymSem COutDataWkThread::m_tWakeSem;
 bool COutDataWkThread::m_bIsStatic=true; //这个值最好在相关静态函数里设置
 int COutDataWkThread::m_iMaxMemNum=1000; //这个值最好在相关静态函数里设置
 COutDataWkThread * COutDataWkThread::m_pIdleMemFront=NULL;
-COutDataWkThread::COutDataWkThread(CReator *pReator,queue<Message> *pQueTEvData):CThread()
+COutDataWkThread::COutDataWkThread(CReator *pReator,queue<vector<vigra::BRGBImage*>> *pQueTEvData):CThread()
 {
 	m_ptReactor =NULL;
 	m_pQueTEvData = pQueTEvData;
@@ -25,7 +25,7 @@ COutDataWkThread::~COutDataWkThread()
 
 int COutDataWkThread::ThreadFunc(void)
 {
-	Message tTmmPara;
+    vector<vigra::BRGBImage*> tTmmPara;
 	if( false==m_bIsStatic )
 	{
 		if( !SetAynCancel() )
