@@ -52,12 +52,6 @@ int main(void)
     int height = 480;
     CMsgQueue * msgQueue=new CMsgQueue(1124);
     CImageTrans* imageTrans=new CImageTrans(width,height,"./image/");
-    queue<vigra::BRGBImage*> queue1;
-//    vector<vigra::BRGBImage*> vector2;
-//    vector<vigra::BRGBImage*> vector3;
-//    vector<vigra::BRGBImage*> vector4;
-//    vector<vigra::BRGBImage*> vector5;
-//    vector<vigra::BRGBImage*> vector6;
 
 	int i=1;
 	CReator *pReator = CReator::Instance();
@@ -80,15 +74,14 @@ int main(void)
             vector<vigra::BRGBImage*> images;
 			// tTest.msg_type=1;
 			// snprintf(tTest.pPara,10, "hello %d para from queue",i);
-            while(queue1.empty()){
-                msgQueue->receiveMsg(&tTest,0);
-                cout<<tTest.m_length<<endl;
-                imageTrans->transform((const unsigned char *) tTest.pPara);
-                queue1.push(imageTrans->getBRGBImage());
-                imageTrans->exportAImage();
-            }
-            images.push_back(queue1.front());
-            queue1.pop();
+
+            msgQueue->receiveMsg(&tTest,1);
+            cout<<tTest.m_msgType<<endl;
+            cout<<tTest.m_length<<endl;
+            imageTrans->transform((const unsigned char *) tTest.pPara);
+            imageTrans->exportAImage();
+
+            images.push_back(imageTrans->getBRGBImage());
 
 //			pThreadPool->DispatchEvent( (void *)imageTrans->getBRGBImage() );
 
