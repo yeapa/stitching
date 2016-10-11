@@ -5,6 +5,7 @@
 #include "CEventObserver.h"
 #include "COutDataWkThreadPool.h"
 #include "CReator.h"
+#include "CEncoder.h"
 
 // #include "CLog.h"
 #include "CLocalThreadLog.h"
@@ -24,8 +25,18 @@ public:
 //		exportImage(vigra::srcImageRange(*pInPara), vigra::ImageExportInfo(picName.c_str()).setCompression("80"));
 		cout<<"threadid="<<pthread_self()<<"  vectorSize: "<<pInPara->size()<<endl;
 
-        CImageTrans imageTrans(640,480);
-        imageTrans.exportAImage(pInPara->front(),"./");
+//        CImageTrans imageTrans(640,480);
+//        imageTrans.exportAImage(pInPara->front(),"./");
+//
+//        unsigned char* pYUV420P=new unsigned char[640*480*3/2];
+//        imageTrans.BRGBImage2YUV420p(pInPara->front(),pYUV420P);
+//        encoder->init();
+//		encoder->encodeYuv(pYUV420P);
+
+
+//        ofstream out("a.yuv");
+//        out.write((const char*)pYUV420P,640*480*3/2);
+
 //		printf(" is dealing with \"%s\"\n",pInPara );
 		return 0;
 	}
@@ -33,6 +44,7 @@ public:
 
 
 using namespace std;
+
 int main(void)
 {
 	//-------------------------------------------------------
@@ -51,6 +63,11 @@ int main(void)
     int width = 640;
     int height = 480;
     CMsgQueue * msgQueue=new CMsgQueue(1124);
+//    msgQueue->Delete();
+
+    CEncoder* encoder = new CEncoder(width,height,"ds.h264");
+    encoder->init();
+
     CImageTrans* imageTrans=new CImageTrans(width,height,"./image/");
 
 	int i=1;
@@ -78,8 +95,13 @@ int main(void)
             msgQueue->receiveMsg(&tTest,1);
             cout<<tTest.m_msgType<<endl;
             cout<<tTest.m_length<<endl;
+
             imageTrans->transform((const unsigned char *) tTest.pPara);
             imageTrans->exportAImage();
+
+            unsigned char* pYUV420P=new unsigned char[640*480*3/2];
+            imageTrans->BRGBImage2YUV420p(imageTrans->getBRGBImage(),pYUV420P);
+            encoder->encodeYuv(pYUV420P);
 
             images.push_back(imageTrans->getBRGBImage());
 
