@@ -20,13 +20,12 @@ public:
 	~CWkObserver() {};
 	int EventProcess(vector<vigra::BRGBImage*> *pInPara, char *pOutPara=NULL)
 	{
-
 //		string picName= "./hello.jpg";
 //		exportImage(vigra::srcImageRange(*pInPara), vigra::ImageExportInfo(picName.c_str()).setCompression("80"));
 		cout<<"threadid="<<pthread_self()<<"  vectorSize: "<<pInPara->size()<<endl;
 
-//        CImageTrans imageTrans(640,480);
-//        imageTrans.exportAImage(pInPara->front(),"./");
+        CImageTrans imageTrans(1920,1080);
+        imageTrans.exportAImage(pInPara->front(),"./");
 //
 //        unsigned char* pYUV420P=new unsigned char[640*480*3/2];
 //        imageTrans.BRGBImage2YUV420p(pInPara->front(),pYUV420P);
@@ -45,7 +44,7 @@ public:
 
 using namespace std;
 
-int main(void)
+int main(int argc, char** argv)
 {
 	//-------------------------------------------------------
 	// CLog *pLog=new CLocalThreadLog("../log/testThreadLog");
@@ -59,11 +58,13 @@ int main(void)
 	// cout << "string a = "+a;
 	//-----------------------------------------------------------------
 
+    int width = 1920;
+    int height = 1080;
 
-    int width = 640;
-    int height = 480;
-    CMsgQueue * msgQueue=new CMsgQueue(1124);
-//    msgQueue->Delete();
+    CMsgQueue * msgQueue1=new CMsgQueue(1001);
+    CMsgQueue * msgQueue2=new CMsgQueue(1002);
+    CMsgQueue * msgQueue3=new CMsgQueue(1003);
+    CMsgQueue * msgQueue4=new CMsgQueue(1004);
 
     CEncoder* encoder = new CEncoder(width,height,"ds.h264");
     encoder->init();
@@ -82,28 +83,39 @@ int main(void)
 	if( !pThreadPool->Init() )
 		{ cout<<"fail in create COutDataWkThreadPool"<<endl; return -1;}
 
+
+    Message tTest;
+//    Message tTest2;
+//            Message tTest3;
 	while(1)
 	{
 		try
 		{
 			sleep(1);
-			Message tTest;
             vector<vigra::BRGBImage*> images;
 			// tTest.msg_type=1;
 			// snprintf(tTest.pPara,10, "hello %d para from queue",i);
 
-            msgQueue->receiveMsg(&tTest,1);
-            cout<<tTest.m_msgType<<endl;
-            cout<<tTest.m_length<<endl;
-
+            msgQueue1->receiveMsg(&tTest,0);
             imageTrans->transform((const unsigned char *) tTest.pPara);
             imageTrans->exportAImage();
-
-            unsigned char* pYUV420P=new unsigned char[640*480*3/2];
-            imageTrans->BRGBImage2YUV420p(imageTrans->getBRGBImage(),pYUV420P);
-            encoder->encodeYuv(pYUV420P);
-
             images.push_back(imageTrans->getBRGBImage());
+
+            msgQueue2->receiveMsg(&tTest,0);
+            imageTrans->transform((const unsigned char *) tTest.pPara);
+            imageTrans->exportAImage();
+            images.push_back(imageTrans->getBRGBImage());
+
+            msgQueue3->receiveMsg(&tTest,0);
+            imageTrans->transform((const unsigned char *) tTest.pPara);
+            imageTrans->exportAImage();
+            images.push_back(imageTrans->getBRGBImage());
+
+            msgQueue4->receiveMsg(&tTest,0);
+            imageTrans->transform((const unsigned char *) tTest.pPara);
+            imageTrans->exportAImage();
+            images.push_back(imageTrans->getBRGBImage());
+
 
 //			pThreadPool->DispatchEvent( (void *)imageTrans->getBRGBImage() );
 

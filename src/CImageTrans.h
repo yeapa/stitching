@@ -40,8 +40,9 @@ public:
     bool transform(const unsigned char * pYUV);
     void exportAImage(int i);
     void exportAImage();
-    bool BRGBImage2YUV420p(vigra::BRGBImage* image,unsigned char* pYUV420P);
     void exportAImage(vigra::BRGBImage* image,string path);
+    bool BRGBImage2YUV420p(vigra::BRGBImage* image,unsigned char* pYUV420P);
+
 
 private:
     unsigned int m_width;

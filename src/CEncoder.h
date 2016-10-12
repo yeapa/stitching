@@ -8,9 +8,9 @@
 #include <stdio.h>
 extern "C"
 {
-#include </usr/local/ffmpeg/include/libavutil/opt.h>
-#include </usr/local/ffmpeg/include/libavcodec/avcodec.h>
-#include </usr/local/ffmpeg/include/libavformat/avformat.h>
+#include </usr/local/ffmpeg2/include/libavutil/opt.h>
+#include </usr/local/ffmpeg2/include/libavcodec/avcodec.h>
+#include </usr/local/ffmpeg2/include/libavformat/avformat.h>
 };
 
 #include <stdio.h>
@@ -33,7 +33,6 @@ private:
     int in_w;
     int in_h;                              //Input data's width and height
     int count=0;
-
 
     AVFormatContext* pFormatCtx;
     AVOutputFormat* fmt;
